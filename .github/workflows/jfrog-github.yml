@@ -35,7 +35,6 @@ jobs:
       - name: Build Maven Project
         # This captures the 14 dependencies into the "Repro_Build" record
         run: |
-          jf mvn versions:set -DnewVersion="${{ env.VERSION }}" -DgenerateBackupPoms=false
           jf mvn clean deploy --build-name="${{ env.BUILD_NAME }}" --build-number="${{ env.VERSION }}"
           
       - name: Package & Upload Assets to Generic Repo
