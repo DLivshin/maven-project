@@ -35,10 +35,13 @@ jobs:
       - name: Build Maven Project
         run: |
           export JFROG_RUN_NATIVE=true
+
+          # 2. Run the deploy. 
           jf mvn clean deploy \
-            -DaltDeploymentRepository=example-libs-release::default::${{ vars.JF_URL }}/artifactory/example-libs-release \
+            -DaltDeploymentRepository=example-libs-release::https://davidtesttrial.jfrog.io/artifactory/example-libs-release \
             --build-name="${{ env.BUILD_NAME }}" \
-            --build-number="${{ env.VERSION }}"          
+            --build-number="${{ env.VERSION }}"
+            
       - name: Package & Upload Assets to Generic Repo
         run: |
           # Fixed the double --build-name typo here
