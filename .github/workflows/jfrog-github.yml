@@ -38,8 +38,12 @@ jobs:
       - name: Configure for Dev
         run: |
           # We deploy to a 'dev' repo first
-          jf mvnc --repo-resolve-releases=example-libs-release --repo-deploy-releases=example-libs-release
-
+          jf mvnc \  
+            --repo-resolve-releases=example-libs-release \
+            --repo-resolve-snapshots=example-libs-snapshot \
+            --repo-deploy-releases=example-libs-release-local \
+            --repo-deploy-snapshots=example-libs-snapshot-local
+            
       - name: Build and Deploy Release JAR
         run: |
           # 1. Update the POM version to match our unique release
