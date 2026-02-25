@@ -34,8 +34,6 @@ jobs:
 
       - name: Build Maven Project
         run: |
-          export JFROG_RUN_NATIVE=true
-
           # 2. Run the deploy. 
           jf mvn clean deploy \
             -DaltDeploymentRepository=example-libs-release::https://davidtesttrial.jfrog.io/artifactory/example-libs-release \
