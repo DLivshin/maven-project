@@ -34,10 +34,11 @@ jobs:
 
       - name: Build Maven Project
         run: |
-          # This flag fixes the NullPointerException with Maven 3.9+
           export JFROG_RUN_NATIVE=true
-          jf mvn clean deploy --build-name="${{ env.BUILD_NAME }}" --build-number="${{ env.VERSION }}"
-          
+          jf mvn clean deploy \
+            -DaltDeploymentRepository=example-libs-release::default::${{ vars.JF_URL }}/artifactory/example-libs-release \
+            --build-name="${{ env.BUILD_NAME }}" \
+            --build-number="${{ env.VERSION }}"          
       - name: Package & Upload Assets to Generic Repo
         run: |
           # Fixed the double --build-name typo here
