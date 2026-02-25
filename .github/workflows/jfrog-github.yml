@@ -28,21 +28,20 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '8'
-
+          
+      - name: Setup Maven 3.8.8
+        uses: stCarolas/setup-maven@v5
+        with:
+          maven-version: '3.8.8'
       - name: Configure Maven for Artifactory
         run: jf mvnc --repo-resolve-releases=example-libs-release --repo-resolve-snapshots=example-libs-snapshot
 
       - name: Build Maven Project
         run: |
-          # 2. Run the deploy. 
-          jf mvn clean deploy \
-            -DaltDeploymentRepository=example-libs-release::https://davidtesttrial.jfrog.io/artifactory/example-libs-release \
-            --build-name="${{ env.BUILD_NAME }}" \
-            --build-number="${{ env.VERSION }}"
+          jf mvn clean deploy --build-name="${{ env.BUILD_NAME }}" --build-number="${{ env.VERSION }}"
             
       - name: Package & Upload Assets to Generic Repo
         run: |
-          # Fixed the double --build-name typo here
           jf rt upload "assets/*" "generic-local-dev/release-assets/${{ env.VERSION }}/" \
             --build-name="${{ env.BUILD_NAME }}" \
             --build-number="${{ env.VERSION }}"
