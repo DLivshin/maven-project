@@ -36,9 +36,7 @@ jobs:
           maven-version: '3.8.8'
 
       - name: Configure for Dev
-        run: |
-          # We deploy to a 'dev' repo first
-          run: jf mvnc --repo-resolve-releases=example-libs-release --repo-resolve-snapshots=example-libs-snapshot --repo-deploy-releases=example-libs-release-local --repo-deploy-snapshots=example-libs-snapshot-local
+        run: jf mvnc --repo-resolve-releases=example-libs-release --repo-resolve-snapshots=example-libs-snapshot --repo-deploy-releases=example-libs-release-local --repo-deploy-snapshots=example-libs-snapshot-local
             
       - name: Build and Deploy Release JAR
         run: |
