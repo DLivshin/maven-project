@@ -57,3 +57,7 @@ jobs:
 
       - name: Publish Build Info
         run: jf rt build-publish "${{ env.BUILD_NAME }}" "${{ env.VERSION }}"
+      
+      - name: build scan
+        run: |            
+          jf build-scan --build-name="${{ env.BUILD_NAME }}" --build-number="${{ env.VERSION }}"
