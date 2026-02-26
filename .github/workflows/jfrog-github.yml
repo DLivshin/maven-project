@@ -60,4 +60,4 @@ jobs:
       
       - name: build scan
         run: |            
-          jf build-scan --build-name="${{ env.BUILD_NAME }}" --build-number="${{ env.VERSION }}"
+          jf build-scan "${{ env.BUILD_NAME }}" "${{ env.VERSION }}"
