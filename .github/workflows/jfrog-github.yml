@@ -23,6 +23,8 @@ jobs:
           JF_URL: ${{ vars.JF_URL }}
         with:
           oidc-provider-name: DLivshin/maven-project@github
+          disable-auto-build-publish: true
+
 
       - name: Setup Java & Maven 3.8.8
         uses: actions/setup-java@v4
@@ -44,7 +46,7 @@ jobs:
           jf mvn versions:set -DnewVersion="${{ env.VERSION }}" -DgenerateBackupPoms=false
           
           # 2. Deploy the immutable Release JAR to the Dev repo
-          jf mvn -X -e clean deploy --build-name="${{ env.BUILD_NAME }}" --build-number="${{ env.VERSION }}"
+          jf mvn -e clean deploy --build-name="${{ env.BUILD_NAME }}" --build-number="${{ env.VERSION }}"
 
       - name: Upload Assets
         run: |
