@@ -1,4 +1,4 @@
-name: "Release Build & Candidate"
+name: "TestApplicationBuild"
 on: push
 
 permissions:
@@ -6,7 +6,7 @@ permissions:
   contents: read
 
 env:
-  BUILD_NAME: TestApplication
+  BUILD_NAME: TestApplicationBuild
   # Unique release version for every build
   VERSION: "1.0.${{ github.run_number }}"
 
@@ -44,7 +44,7 @@ jobs:
           jf mvn versions:set -DnewVersion="${{ env.VERSION }}" -DgenerateBackupPoms=false
           
           # 2. Deploy the immutable Release JAR to the Dev repo
-          jf mvn clean deploy --build-name="${{ env.BUILD_NAME }}" --build-number="${{ env.VERSION }}"
+          jf mvn -X -e clean deploy --build-name="${{ env.BUILD_NAME }}" --build-number="${{ env.VERSION }}"
 
       - name: Upload Assets
         run: |
